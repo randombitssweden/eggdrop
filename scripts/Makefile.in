@@ -42,6 +42,8 @@ install:
 		for i in $(DOCS); do \
 			$(INSTALL_DATA) $(srcdir)/$$i $(DEST)/scripts/; \
 		done; \
+		BOTNETPASS=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 10 | head -n 1)
+		sed -i 's/changethis/$BOTNETPASS/g' $SCRIPTS/netset.tcl
 		for i in $(SCRIPTS); do \
 			$(INSTALL_DATA) $(srcdir)/$$i $(DEST)/scripts/; \
 		done; \
