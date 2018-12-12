@@ -270,7 +270,7 @@ static int hand_on_chan(struct chanset_t *chan, struct userrec *u)
   memberlist *m;
 
   for (m = chan->channel.member; m && m->nick[0]; m = m->next) {
-    sprintf(s, "%s!%s", m->nick, m->userhost);
+    snprintf(s, sizeof(s), "%s!%s", m->nick, m->userhost);
     if (u == get_user_by_host(s))
       return 1;
   }
@@ -679,7 +679,7 @@ static void check_expired_chanstuff()
       for (m = chan->channel.member; m && m->nick[0]; m = n) {
         n = m->next;
         if (m->split && now - m->split > wait_split) {
-          sprintf(s, "%s!%s", m->nick, m->userhost);
+          snprintf(s, sizeof(s), "%s!%s", m->nick, m->userhost);
           check_tcl_sign(m->nick, m->userhost,
                          m->user ? m->user : get_user_by_host(s),
                          chan->dname, "lost in the netsplit");

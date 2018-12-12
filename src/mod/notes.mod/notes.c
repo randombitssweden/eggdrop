@@ -453,7 +453,7 @@ static int tcl_listnotes STDVAR
   notes_parse(ln, argv[2]);
   for (i = 1; i <= numnotes; i++) {
     if (notes_in(ln, i)) {
-      sprintf(s, "%d", i);
+      snprintf(s, sizeof(s), "%d", i);
       Tcl_AppendElement(irp, s);
     }
   }

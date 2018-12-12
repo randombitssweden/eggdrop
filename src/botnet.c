@@ -497,11 +497,11 @@ void answer_local_whom(int idx, int chan)
           hrs = ((now - dcc[i].timeval) - (days * 86400)) / 3600;
           mins = ((now - dcc[i].timeval) - (hrs * 3600)) / 60;
           if (days > 0)
-            sprintf(idle, " [idle %lud%luh]", days, hrs);
+            snprintf(idle, sizeof(idle), " [idle %lud%luh]", days, hrs);
           else if (hrs > 0)
-            sprintf(idle, " [idle %luh%lum]", hrs, mins);
+            snprintf(idle, sizeof(idle), " [idle %luh%lum]", hrs, mins);
           else
-            sprintf(idle, " [idle %lum]", mins);
+            snprintf(idle, sizeof(idle), " [idle %lum]", mins);
         } else
           idle[0] = 0;
         total++;

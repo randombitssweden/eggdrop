@@ -1948,7 +1948,7 @@ static void dcc_telnet_pw(int idx, char *buf, int x)
   if (notify_new[0]) {
     char s[121], s1[121], s2[121];
 
-    sprintf(s, "Introduced to %s, %s", dcc[idx].nick, dcc[idx].host);
+    snprintf(s, sizeof(s), "Introduced to %s, %s", dcc[idx].nick, dcc[idx].host);
     strcpy(s1, notify_new);
     splitc(s2, s1, ',');
     while (s2[0]) {

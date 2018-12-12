@@ -327,7 +327,7 @@ static int detect_chan_flood(char *floodnick, char *floodhost, char *from,
         char s[UHOSTLEN];
 
         for (m = chan->channel.member; m && m->nick[0]; m = m->next) {
-          sprintf(s, "%s!%s", m->nick, m->userhost);
+          snprintf(s, sizeof(s), "%s!%s", m->nick, m->userhost);
           if (wild_match(h, s) && (m->joined >= chan->floodtime[which]) &&
               !chan_sentkick(m) && !match_my_nick(m->nick) && (me_op(chan) ||
               (me_halfop(chan) && !chan_hasop(m)))) {
@@ -445,7 +445,7 @@ static void refresh_ban_kick(struct chanset_t *chan, char *user, char *nick)
         char c[512];            /* The ban comment.     */
         char s[UHOSTLEN];
 
-        sprintf(s, "%s!%s", m->nick, m->userhost);
+        snprintf(s, sizeof(s), "%s!%s", m->nick, m->userhost);
         get_user_flagrec(m->user ? m->user : get_user_by_host(s), &fr,
                          chan->dname);
         if (!glob_friend(fr) && !chan_friend(fr)) {
@@ -850,7 +850,7 @@ static void check_this_user(char *hand, int delete, char *host)
 
   for (chan = chanset; chan; chan = chan->next)
     for (m = chan->channel.member; m && m->nick[0]; m = m->next) {
-      sprintf(s, "%s!%s", m->nick, m->userhost);
+      snprintf(s, sizeof(s), "%s!%s", m->nick, m->userhost);
       u = m->user ? m->user : get_user_by_host(s);
       if ((u && !egg_strcasecmp(u->handle, hand) && delete < 2) ||
           (!u && delete == 2 && match_addr(host, fixfrom(s)))) {
@@ -877,7 +877,7 @@ static void recheck_channel(struct chanset_t *chan, int dobans)
   stacking++;
   /* Okay, sort through who needs to be deopped. */
   for (m = chan->channel.member; m && m->nick[0]; m = m->next) {
-    sprintf(s, "%s!%s", m->nick, m->userhost);
+    snprintf(s, sizeof(s), "%s!%s", m->nick, m->userhost);
     if (!m->user && !m->tried_getuser) {
       m->tried_getuser = 1;
       m->user = get_user_by_host(s);
