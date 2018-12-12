@@ -53,8 +53,8 @@ STRIP = @STRIP@
 RANLIB = @RANLIB@
 
 # make 'modegg'
-MOD_CC = @MOD_CC@
-MOD_LD = @MOD_LD@
+MOD_CC = @MOD_CC@ -fPIE -fstack-protector-all -D_FORTIFY_SOURCE=2
+MOD_LD = @MOD_LD@ -fPIE -fstack-protector-all -D_FORTIFY_SOURCE=2
 MOD_STRIP = @MOD_STRIP@
 
 # make 'modules'
