@@ -260,8 +260,8 @@ void tell_verbose_uptime(int idx)
     /* days */
     sprintf(s, "%d day", (int) (now2 / 86400));
     if ((int) (now2 / 86400) >= 2)
-      strcat(s, "s");
-    strcat(s, ", ");
+      strlcat(s, "s", sizeof(s));
+    strlcat(s, ", ", sizeof(s));
     now2 -= (((int) (now2 / 86400)) * 86400);
   }
   hr = (time_t) ((int) now2 / 3600);
@@ -315,8 +315,8 @@ void tell_verbose_status(int idx)
     /* days */
     sprintf(s, "%d day", (int) (now2 / 86400));
     if ((int) (now2 / 86400) >= 2)
-      strcat(s, "s");
-    strcat(s, ", ");
+      strlcat(s, "s", sizeof(s));
+    strlcat(s, ", ", sizeof(s));
     now2 -= (((int) (now2 / 86400)) * 86400);
   }
   hr = (time_t) ((int) now2 / 3600);
@@ -513,7 +513,7 @@ void chanprog()
 
   if (helpdir[0])
     if (helpdir[strlen(helpdir) - 1] != '/')
-      strcat(helpdir, "/");
+      strlcat(helpdir, "/", sizeof(helpdir));
 
   reaffirm_owners();
   check_tcl_event("userfile-loaded");
@@ -720,7 +720,7 @@ void add_hq_user()
                               USER_VOICE | USER_XFER;
     /* Add to permowner list if there's place */
     if (strlen(owner) + sizeof EGG_BG_HANDLE < sizeof owner)
-      strcat(owner, " " EGG_BG_HANDLE);
+      strlcat(owner, " " EGG_BG_HANDLE, sizeof(owner));
 
     /* Update laston info, gets cleared at rehash/reload */
     touch_laston(dcc[term_z].user, "partyline", now);
