@@ -47,8 +47,8 @@ DEBCFLGS = @DEBCFLGS@
 # contact us via eggdev@eggheads.org
 
 # Defaults
-CC = @CC@
-LD = @CC@
+CC = @CC@ -fPIE -fstack-protector-all -D_FORTIFY_SOURCE=2
+LD = @CC@ -fPIE -fstack-protector-all -D_FORTIFY_SOURCE=2
 STRIP = @STRIP@
 RANLIB = @RANLIB@
 
@@ -58,8 +58,8 @@ MOD_LD = @MOD_LD@
 MOD_STRIP = @MOD_STRIP@
 
 # make 'modules'
-SHLIB_CC = @SHLIB_CC@
-SHLIB_LD = @SHLIB_LD@
+SHLIB_CC = @SHLIB_CC@ -fPIC -fstack-protector-all -D_FORTIFY_SOURCE=2
+SHLIB_LD = @SHLIB_LD@ -fPIC -fstack-protector-all -D_FORTIFY_SOURCE=2
 SHLIB_STRIP = @SHLIB_STRIP@
 MOD_EXT = @MOD_EXT@
 
